@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ots.dao.MessageDao" >
+
+
+    <!-- 查询用户 -->
+
+    
+    <insert id="insert" parameterType="Message">
+    	insert into message(from_userid,target_userid,content)
+    	values(#{fromUserId},#{targetUserId},#{content})
+    </insert>
+
+    <select id="select" parameterType="Message" resultType="Message">
+        select *
+        from message
+        where 1=1
+
+        <if test="msgId != null" >
+            and msg_id = #{msgId}
+        </if>
+
+        <if test="fromUserId != null" >
+            and from_userid = #{fromUserId}
+        </if>
+
+        <if test="targetUserId != null" >
+            and target_userid = #{targetUserId}
+        </if>
+    </select>
+
+	<!--<update id="update" parameterType="TeacherInfo">-->
+		<!--update teacher_info set-->
+		<!--(userid,realname,idcardnum,grade,subjectid)-->
+		<!--values(#{userId},#{realName},#{idCardNum},#{grade},#{subjectId})-->
+	<!--</update>-->
+	
+    
+</mapper>
