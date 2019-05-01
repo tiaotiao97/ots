@@ -25,6 +25,7 @@ public class TeacherCourseController {
         return "querycourses";
     }
 
+
     @RequestMapping("queryTeacherCourses")
     @ResponseBody
     public ResultBean<List<TeacherCourseVo>> queryTeacherCourseList(TeacherCourseVo teacherCourseVo){
