@@ -212,8 +212,6 @@ public class TeacherUserController {
 			resultBean.setCode(200);
 			resultBean.setMsg("add course successfully.");
 			resultBean.setData(teacherCourse);
-		}else {
-
 		}
 		return resultBean;
 	}
