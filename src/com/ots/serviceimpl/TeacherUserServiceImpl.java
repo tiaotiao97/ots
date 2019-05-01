@@ -2,8 +2,10 @@ package com.ots.serviceimpl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ots.dao.TeacherCourseDao;
 import com.ots.dao.TeacherInfoDao;
 import com.ots.dao.UserDao;
+import com.ots.entity.TeacherCourse;
 import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
 import com.ots.service.TeacherUserService;
@@ -43,6 +45,9 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	
 	@Autowired
 	private RedisService redisService;
+
+	@Autowired
+	private TeacherCourseDao teacherCourseDao;
 	
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -273,6 +278,10 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 
 	}
 
+	@Override
+	public int addCourse(TeacherCourse teacherCourse) {
+		return this.teacherCourseDao.insert(teacherCourse);
+	}
 
 
 }

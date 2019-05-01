@@ -1,5 +1,6 @@
 package com.ots.service;
 
+import com.ots.entity.TeacherCourse;
 import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
 import com.ots.vo.TeacherLoginVo;
@@ -22,6 +23,6 @@ public interface TeacherUserService {
 	public Boolean saveTeacherInfo(TeacherInfo teacherInfo,String avatarName);
 	public String saveIamge(MultipartFile multipartFile) throws IOException;
 	public void changeTeacherStatus(String loginToken,Integer status);
-
+	public int addCourse(TeacherCourse teacherCourse);
 
 }

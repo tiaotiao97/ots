@@ -11,6 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-
+    <form action="addCourse.action" method="post">
+        课程id：<input name="courseId">（可选数字1-6）<br>
+        课程费用：<input name="coursePrice">（?元/时）<br>
+        <input type="submit">
+    </form>
 </body>
 </html>

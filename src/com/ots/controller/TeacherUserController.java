@@ -1,8 +1,11 @@
 package com.ots.controller;
 
 import com.ots.controller.vo.TeacherInfoAddVo;
+import com.ots.entity.TeacherCourse;
 import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
+import com.ots.resultbean.GetResultBean;
+import com.ots.resultbean.ResultBean;
 import com.ots.service.TeacherUserService;
 import com.ots.utils.ContextUtil;
 import com.ots.vo.TeacherLoginVo;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,6 +53,11 @@ public class TeacherUserController {
 	@RequestMapping(value="addinfo",method= RequestMethod.GET)
 	public String addinfo(){
 		return "addinfo";
+	}
+
+	@RequestMapping(value = "addcourseinfo",method = RequestMethod.GET)
+	public String addcourse(){
+		return "addcourseinfo";
 	}
 
 
@@ -186,6 +195,27 @@ public class TeacherUserController {
 		TeacherLoginVo teacherLoginVo = this.teacherUserService.queryTeacherLoginVo(loginToken);
 		return ResponseEntity.ok(teacherLoginVo);
 
+	}
+
+	@ResponseBody
+	@RequestMapping("addCourse")
+	public ResultBean<TeacherCourse> addCourseInfo(TeacherCourse teacherCourse){ Long teacherId = ContextUtil.getTeacherLoginInfo().getUser().getUserId();
+		ResultBean<TeacherCourse> resultBean = GetResultBean.getResultBean();
+		resultBean.setCode(500);
+		resultBean.setMsg("系统错误.");
+		if(teacherCourse.getCourseId()==null || teacherCourse.getCoursePrice()==null){
+			return resultBean;
+		}
+		teacherCourse.setTeacherId(teacherId);
+		int flag = this.teacherUserService.addCourse(teacherCourse);
+		if(flag==1){
+			resultBean.setCode(200);
+			resultBean.setMsg("add course successfully.");
+			resultBean.setData(teacherCourse);
+		}else {
+
+		}
+		return resultBean;
 	}
 
 }
