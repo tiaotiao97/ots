@@ -4,6 +4,7 @@ import com.ots.controller.vo.TeacherInfoAddVo;
 import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
 import com.ots.service.TeacherUserService;
+import com.ots.utils.ContextUtil;
 import com.ots.vo.TeacherLoginVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -173,8 +174,8 @@ public class TeacherUserController {
 
 	@RequestMapping("/showTeacherStatus")
 	@ResponseBody
-	public Map<String,Integer> showStatus(@CookieValue(name = "login_token")String loginToken){
-		TeacherLoginVo teacherLoginVo = this.teacherUserService.queryTeacherLoginVo(loginToken);
+	public Map<String,Integer> showStatus(String loginToken){
+		TeacherLoginVo teacherLoginVo = ContextUtil.getTeacherLoginInfo();
 		Integer status = teacherLoginVo.getUser().getStatus();
 		Map<String,Integer> result = new HashMap<String,Integer>();
 		result.put("status",status);

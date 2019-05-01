@@ -30,10 +30,10 @@
     </bean>	
     
     <!-- 配置拦截器 -->
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
     	<mvc:interceptor>
         	<mvc:mapping path="/**" />
-        	<bean class="com.xj8.core.interceptor.LoginInterceptor" />
+        	<bean class="com.ots.interceptor.LoginInterceptor" />
     	</mvc:interceptor>
-	</mvc:interceptors>	 -->
+	</mvc:interceptors>
 </beans>
