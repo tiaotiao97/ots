@@ -5,6 +5,12 @@ public class ResultBean<T> {
     private String msg;
     private T data;
 
+    public void setResult(Integer code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
     public Integer getCode() {
         return code;
     }

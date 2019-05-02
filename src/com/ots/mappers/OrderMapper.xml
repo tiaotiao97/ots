@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ots.dao.OrderDao" >
+
+
+    <!-- 查询用户 -->
+    <select id="select" parameterType="Order" resultType="Order">
+	    select *
+	    from ots_order
+	    where 1=1
+	    
+	    <if test="oderId != null" >
+        and oderId = #{oderId}
+      	</if>
+      	
+      	<if test="teacherId != null" >
+        and teacherId = #{teacherId}
+      	</if>
+
+		<if test="studentId != null" >
+			and studentId = #{studentId}
+		</if>
+
+		<if test="isPay != null" >
+			and isPay = #{isPay}
+		</if>
+
+    </select>
+    
+    <insert id="insert" parameterType="Order">
+    	insert into ots_order(teacherId,studentId,courseId,price,teacherMoney,platformMoney)
+    	values(#{teacherId},#{studentId},#{courseId},#{price},#{teacherMoney},#{platformMoney})
+    </insert>
+
+    
+</mapper>
