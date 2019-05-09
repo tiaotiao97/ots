@@ -11,6 +11,15 @@ public class User {
 	private String password;
 	private String phone;
 	private Integer status;
+	private Integer identity;
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
 
 	public Integer getStatus() {
 		return status;

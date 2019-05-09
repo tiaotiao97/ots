@@ -12,9 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     登陆：<br>
-    <form id="login_form" method="post" action="doTeacherLogin.action">
+    <form id="login_form" method="post" action="doLogin.action">
     username:<input name="username"><br>
     password:<input name="password"><br>
+    identity:<input name="identity">（老师1，学生2，平台3）<br>
     <input type="submit" name="submit">
     </form>
   </body>

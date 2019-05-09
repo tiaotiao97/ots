@@ -17,6 +17,10 @@
       	<if test="phone != null" >
         and phone = #{phone}
       	</if>
+
+		<if test="identity != null" >
+			and identity = #{identity}
+		</if>
     </select>
     
     <insert id="insertUser" parameterType="User">

@@ -18,6 +18,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,9 @@ public class WebSocketServer {
     public static Map<ImUser,WebSocketServer> clients = new ConcurrentHashMap<ImUser,WebSocketServer>();
     private ImUser imUser;
     private Session session;
+    private long startTime;
+    private long endTime;
+
     private static int id = 0;
     @Autowired
     private TeacherUserService teacherUserService;
@@ -47,12 +51,16 @@ public class WebSocketServer {
 
         clients.put(imUser,this);
         System.out.println("已连接..");
-
+        this.startTime = System.currentTimeMillis();
     }
 
     @OnClose
     public void onClose(){
         clients.remove(this.imUser);
+        this.endTime = System.currentTimeMillis();
+        long time = this.endTime-this.startTime;
+        System.out.println(time);
+
     }
 
     @OnMessage
