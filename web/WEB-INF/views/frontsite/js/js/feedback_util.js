@@ -67,7 +67,7 @@ var FeedbackUtil = {
         var html = stylehtml+bghtml;
 
         html +='<div id="feedback_popup">';
-        html +='<form  id="feedback_form" target="feedback_iframe" method="POST" action="http://localhost:8080/ots/reply/replyMsg">';
+        html +='<form  id="feedback_form" target="feedback_iframe" method="POST" action="http://localhost:8080/ots/message/sendMessage">';
         html +='<input type="hidden" name="url" value="'+window.location.href+'" />';
         html +='<h2><a href="javascript:void(0);" target="_self" onclick="FeedbackUtil.close();return false;" class="close"></a>消息回复</h2>';
         html +='<div class="pop_box">';
