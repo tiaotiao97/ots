@@ -21,8 +21,10 @@ public interface TeacherUserService {
 	public TeacherLoginVo queryTeacherLoginVo(String loginToken);
 //	public User queryTeacherUserInfoByToken(String loginToken);
 	public Boolean saveTeacherInfo(TeacherInfo teacherInfo,String avatarName);
+	public Boolean updateTeacherInfo(TeacherInfo teacherInfo,String avatarName);
 	public String saveIamge(MultipartFile multipartFile) throws IOException;
 	public void changeTeacherStatus(String loginToken,Integer status);
 	public int addCourse(TeacherCourse teacherCourse);
+	public TeacherInfo queryTeacherByUserId(TeacherInfo teacherInfo);
 
 }

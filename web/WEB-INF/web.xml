@@ -34,6 +34,9 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- 配置Spring MVC前端核心控制器 -->
+
+
+
     <servlet>
         <servlet-name>crm</servlet-name>
         <servlet-class>
@@ -46,9 +49,10 @@
         <!-- 配置服务器启动后立即加载Spring MVC配置文件 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>crm</servlet-name>
-        <url-pattern>*.action</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- 系统默认页面 -->
     <welcome-file-list>

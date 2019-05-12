@@ -6,11 +6,15 @@ import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
 import com.ots.resultbean.GetResultBean;
 import com.ots.resultbean.ResultBean;
+import com.ots.service.LoginService;
 import com.ots.service.TeacherUserService;
 import com.ots.utils.ContextUtil;
 import com.ots.vo.TeacherLoginVo;
+import com.ots.vo.UserLoginVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.tools.ant.taskdefs.Get;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -83,71 +87,31 @@ public class TeacherUserController {
 		
 	}
 	
-	@RequestMapping(value="/doTeacherRegister",method= RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> doTeacherRegister(User user){
-				
-		 Map<String, Object> result = new HashMap<String, Object>();
-		 
-		
-		try {
-			result = this.teacherUserService.checkRegisterInfo(user);
-			if(result.get("status").equals("200")){
-				User registerUser = (User)(result.get("data"));
-				Boolean bool = this.teacherUserService.doRegister(registerUser);
-			}
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			result.put("status", "500");
-			result.put("data", "程序异常,即将跳转到注册界面.");
-		}
-		return result;
-	}
+
 	
-	@RequestMapping(value="doTeacherLogin",method= RequestMethod.POST)
+
+
+	@Autowired
+	private LoginService loginService;
+
+	@RequestMapping(value="queryTeacherUserInfo",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> doTeacherLogin(HttpServletRequest request, @CookieValue(required = false,name="login_token")String existedToken, User user, HttpServletResponse response){
-		System.out.println("hello");
-		Map<String, Object> result = new HashMap<String, Object>();
-		
-		String loginToken;
-		
-		try {
-			System.out.println("aaaaa");
-			loginToken = this.teacherUserService.doTeacherLogin(existedToken,user.getUsername(),user.getPassword());
-			System.out.println("token="+loginToken);
-			if(StringUtils.isEmpty(loginToken)){
-				//登陆失败
-				System.out.println("token为空");
-				result.put("status", "500");
-				return result;
-			}
-
-			//登陆成功
-
-			Cookie cookie = new Cookie("login_token",loginToken);
-			cookie.setPath(request.getContextPath());
-			response.addCookie(cookie);
-			result.put("status", "200");
-			return result;
-		} catch (Exception e) {
-			result.put("status", "500");
-			return result;
-		}
-	}
-
-	@RequestMapping(value="queryTeacherUserInfo/{loginToken}",method=RequestMethod.GET)
 	//这个函数查的是UserDao里的字段
-	public ResponseEntity<TeacherLoginVo> queryTearcherUserInfoByToken(@PathVariable("loginToken") String loginToken){
+	public ResultBean<UserLoginVo> queryTearcherUserInfoByToken(){
+		UserLoginVo userLoginVo = ContextUtil.getUserLoginInfo();
 
-		TeacherLoginVo teacherLoginVo = this.teacherUserService.queryTeacherLoginVo(loginToken);
-		if(null == teacherLoginVo){
-			//不存在
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		ResultBean<UserLoginVo> resultBean = GetResultBean.getResultBean();
+		try {
+
+			resultBean.setResult(200,"查询成功.",userLoginVo);
+		} catch (Exception e) {
+			resultBean.setResult(500,"用户信息不存在.",userLoginVo);
 		}
-		return ResponseEntity.ok(teacherLoginVo);
+		if(null == userLoginVo){
+			resultBean.setResult(500,"用户信息不存在.",userLoginVo);
+			//不存在
+		}
+		return resultBean;
 
 	}
 
@@ -214,6 +178,32 @@ public class TeacherUserController {
 			resultBean.setData(teacherCourse);
 		}
 		return resultBean;
+	}
+
+
+
+	@RequestMapping(value="updateTeacherUserInfo",method= RequestMethod.POST)
+	@ResponseBody
+	public ResultBean<UserLoginVo> updateInfo(TeacherInfoAddVo teacherInfoAddVo) throws IOException {
+		UserLoginVo userLoginVo = ContextUtil.getUserLoginInfo();
+		TeacherInfo teacherInfoCondition = new TeacherInfo();
+		Long userId = userLoginVo.getUser().getUserId();
+		teacherInfoCondition.setUserId(userId);
+		TeacherInfo teacherInfo = teacherInfoAddVo.getTeacherInfo();
+		teacherInfo.setUserId(userId);
+		String avatarPath = this.teacherUserService.saveIamge(teacherInfoAddVo.getAvatar());
+		teacherInfo.setAvatar(avatarPath);
+
+		if(this.teacherUserService.queryTeacherByUserId(teacherInfoCondition)==null){
+			this.teacherUserService.saveTeacherInfo(teacherInfo,avatarPath);
+			return null;
+		}
+
+		Boolean bool = this.teacherUserService.updateTeacherInfo(teacherInfo,avatarPath);
+		if(bool==true){
+			return null;
+		}
+		return null;
 	}
 
 }

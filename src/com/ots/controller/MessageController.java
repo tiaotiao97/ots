@@ -1,14 +1,20 @@
 package com.ots.controller;
 
 import com.ots.entity.Message;
+import com.ots.entity.MessageUserVo;
+import com.ots.resultbean.GetResultBean;
+import com.ots.resultbean.ResultBean;
 import com.ots.service.MessageService;
 import com.ots.service.TeacherUserService;
+import com.ots.utils.ContextUtil;
+import com.ots.vo.UserLoginVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -28,21 +34,25 @@ public class MessageController {
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    public void sendMessage(@CookieValue(value = "login_token")String loginToken, Message message){
+    public void sendMessage(Message message){
         //暂时先写成queryTeacher...之后再增加学生的情况.
-        Long currentUserId = this.teacherUserService.queryTeacherLoginVo(loginToken).getUser().getUserId();
+        Long currentUserId = ContextUtil.getUserLoginInfo().getUser().getUserId();
+
         message.setFromUserId(currentUserId);
         this.messageService.sendMessage(message);
     }
 
     @RequestMapping(value = "showMyMessage")
-    public void showMyMessage(@CookieValue(value = "login_token")String loginToken){
-        Long currentUserId = this.teacherUserService.queryTeacherLoginVo(loginToken).getUser().getUserId();
+    @ResponseBody
+    public ResultBean<List<MessageUserVo>> showMyMessage(){
+        ResultBean<List<MessageUserVo>> resultBean = GetResultBean.getResultBean();
+        Long currentUserId = ContextUtil.getUserLoginInfo().getUser().getUserId();
         Message message = new Message();
         message.setFromUserId(currentUserId);
-        List<Message> result = this.messageService.showMyMessage(message);
-
-        System.out.println(result);
+        message.setTargetUserId(currentUserId);
+        List<MessageUserVo> result = this.messageService.showMyMessage(message);
+        resultBean.setResult(200,"查询成功.",result);
+        return resultBean;
     }
 
 }

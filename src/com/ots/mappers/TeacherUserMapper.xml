@@ -27,11 +27,15 @@
 
     </select>
 
-	<!--<update id="update" parameterType="TeacherInfo">-->
-		<!--update teacher_info set-->
-		<!--(userid,realname,idcardnum,grade,subjectid)-->
-		<!--values(#{userId},#{realName},#{idCardNum},#{grade},#{subjectId})-->
-	<!--</update>-->
+	<update id="update" parameterType="TeacherInfo">
+		update teacher_info set
+		userid=#{userId},
+		realname=#{realName},
+		idcardnum=#{idCardNum},
+		bankCardNo=#{bankCardNo},
+		avatar=#{avatar}
+		where userid=#{userId}
+	</update>
 	
     
 </mapper>

@@ -8,25 +8,24 @@
 
     
     <insert id="insert" parameterType="Message">
-    	insert into message(from_userid,target_userid,content)
+    	insert into message(fromUserId,targetUserId,content)
     	values(#{fromUserId},#{targetUserId},#{content})
     </insert>
 
-    <select id="select" parameterType="Message" resultType="Message">
-        select *
-        from message
-        where 1=1
-
-        <if test="msgId != null" >
-            and msg_id = #{msgId}
-        </if>
+    <select id="select" parameterType="Message" resultType="MessageUserVo">
+        select * from
+        (select t1.msgId,t1.fromUserId,t1.fromUserName,t1.content,t1.targetUserid,t2.targetUserName from
+        (select `user`.username as fromUserName ,message.*  from `user`,message WHERE message.fromUserId=`user`.userid) as t1,
+        (select `user`.username as targetUserName,message.msgId  from `user`,message WHERE message.targetUserid=`user`.userid)as t2
+        where t1.msgId=t2.msgId
+        ) as tt where 1=2
 
         <if test="fromUserId != null" >
-            and from_userid = #{fromUserId}
+            or tt.fromUserId = #{fromUserId}
         </if>
 
         <if test="targetUserId != null" >
-            and target_userid = #{targetUserId}
+            or tt.targetUserId = #{targetUserId}
         </if>
     </select>
 

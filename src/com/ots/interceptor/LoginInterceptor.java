@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         }
         UserLoginVo userLoginVo = this.loginService.getUserLoginVo(loginToken);
         if(userLoginVo != null){
-            httpServletRequest.setAttribute("UserLoginVo",userLoginVo);
+            httpServletRequest.setAttribute("userLoginVo",userLoginVo);
             return true;
         }
         //如果不为空，取到用户信息teacherLoginVo

@@ -24,7 +24,8 @@
 		from teacher_info
 		LEFT JOIN teacher_course on teacher_info.userid=teacher_course.teacherId
 		LEFT JOIN course on teacher_course.courseId=course.courseId
-		where 1=1
+		LEFT JOIN `user` on teacher_info.userid=`user`.userid
+		where 1=1 and `user`.identity=1
 
 		<if test="userId != null" >
 			and teacher_info.userid = #{userId}

@@ -1,0 +1,127 @@
+﻿@charset "utf-8";button{cursor:pointer}
+*{outline:none;}
+.main{width:1300px;margin:0 auto 20px auto}
+.conter_l{float:left;width:920px}
+.conter_r{float:right;width:370px}
+.select{padding:10px 0;border-radius:4px;width:100%;margin:10px auto;font-size:14px;background:#fff;color:#666}
+.select li{list-style:none;padding:10px 0 5px 100px}
+.select .select-list{border-bottom:#e5e5e5 1px solid}
+.select .select-list select{appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    width:200px;height:30px;font-size: 17px;margin:0 10px 10px 0;padding-left:30px;border-radius: 3px;
+    padding-right: 26px;
+}
+.select dl{zoom:1;position:relative;line-height:24px}
+.select dl:after{content:" ";display:block;clear:both;height:0;overflow:hidden}
+.select dt{width:100px;margin-bottom:5px;position:absolute;top:0;left:-100px;text-align:right;color:#666;height:24px;line-height:24px}
+.select dd{float:left;display:inline;margin:0 0 5px 5px}
+.select a{display:inline-block;cursor:pointer;white-space:nowrap;height:24px;padding:0 10px;text-decoration:none;color:#666;border-radius:2px}
+.select a:hover{color:#f60;background-color:#f3edc2}
+.select .selected a{color:#fff;background-color:#f60}
+.select-result dt{font-weight:700}
+.select-no{color:#999}
+.select .select-result a{padding-right:20px;background:#f60 url(close.gif) right 9px no-repeat}
+.select .select-result a:hover{background-position:right -15px}
+.sort_row{overflow:hidden;background:#fafafa;width:918px;border:solid 1px #d9d9d9;line-height:48px;height:48px}
+.sort_row .tit{float:left;font-size:14px;color:#666;margin-left:10px}
+.sort_row .selectbox{float:right;font-size:14px;color:#666}
+.sort_row .selectbox select{height:48px;border:none;border-left:solid 1px #d9d9d9;background:url(../images/conlrbg.png) right -188px no-repeat;appearance:none;-moz-appearance:none;-webkit-appearance:none;padding:0 30px 0 30px;font-size:14px;color:#666}
+select::-ms-expand{display:none}
+.teacher_list{overflow:hidden;background:#fff;width:878px;border:solid 1px #d9d9d9;border-top:none;padding:0 20px;border-bottom:none;}
+.listcon{margin:0 auto;padding-top:15px;border-bottom:solid 1px #d9d9d9}
+.page{background:#fff;border-left:1px solid #ddd;border-right:1px solid #ddd;}
+.pagination{text-align: center;margin:3px 0 20px 391px;height:32px;}
+.pagination li{float:left;margin-right:10px;border:1px solid #ddd;padding:2px 10px;height:30px;line-height: 30px;border-radius: 4px;background:#f5f5f5;cursor:pointer;}
+.pagination li span.current{color:#f00;font-weight: bold;}
+.pagination li a{color:#000;font-size:14px;}
+.pagination li:active{background: #ff6400}
+.teacher_pic{float:left;width:130px;height:130px;cursor:pointer;border-radius:50%;margin-top:10px;margin-bottom:5px;}
+.teacher_mx{float:right;width:710px;margin-top:-170px}
+.t_mx{margin:5px auto 0;}
+.t_mx .fl{float:left;width:595px;}
+.t_mx .fr{float:right}
+.t_name{float:left;font-weight:bold;font-size:22px;color:#333;display:inline-block;margin-right:10px;width:72px;height:32px;overflow: hidden;position: relative;cursor:pointer;}
+.t_name:hover{color:#7B430D;-webkit-transition: color 0.5s linear; transition: color 0.5s linear;}
+.t_name::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 72px;
+    border-width: 1px 0;
+    border-color: #7B430D;
+    border-style: solid;
+    left: 0;
+    -webkit-transform: translate3d(-101%,0,0);
+    transform: translate3d(-101%,0,0);
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.listcon:hover .t_name::before {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.t_name span {
+    display: inline-block;
+    position: absolute;
+    -webkit-transform: perspective(1000px) rotate3d(0,1,0,0deg);
+    transform: perspective(1000px) rotate3d(0,1,0,0deg);
+    -webkit-transition: color 0.5s,-webkit-transform 1.5s;
+    transition: color 0.5s,transform 1.5s;
+}
+
+.listcon:hover span {
+    -webkit-transform: perspective(1000px) rotateY(360deg);
+    transform: perspective(1000px) rotateY(360deg);
+}
+.lp_t{float:left;font-size:12px;color:#fff;display:inline-block;padding:5px;padding-left:20px;background:url(../images/icon_plane.png) 5px center no-repeat #ff7b23;border-radius:2px}
+.queen{float:left;display:inline-block;width:100px;height:28px;background:url(../images/rec.jpg) 0 0 no-repeat;margin-left:8px;margin-top:5px;}
+.sch{float:left;display:inline-block;border:1px solid #transparent;height:30px;line-height:30px;text-align:center;border-radius:3px;margin-left:15px;font-size:15px;}
+.maj{float:left;display:inline-block;border:1px solid #transparent;height:30px;line-height:30px;text-align:center;border-radius:3px;margin-left:8px;font-size:15px;}
+.gra{float:left;display:inline-block;border:1px solid #transparent;height:30px;line-height:30px;text-align:center;border-radius:3px;margin-left:8px;font-size:15px;}
+.school{float:left;font-size:12px;color:#333;display:inline-block;padding:5px;padding-left:25px;background:url(../images/icon_school.png) 5px center no-repeat;margin-left:20px}
+.cost{font-size:24px;color:#ff7b23}
+.jiage{font-size:12px;color:#333}
+.keyword span{display:inline-block;border:solid 1px #b3b3b3;border-radius:2px;font-size:14px;color:#b2b2b2;padding:7px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.keyword .cur{border:solid 1px #66a2f7;color:#66a2f7;max-width:235px;}
+.keyword .sub{max-width:280px;color:#666;}
+.brief_1{font-size:12px;color:#ff7b23;line-height:180%;margin:5px auto}
+.brief_2{font-size:12px;color:#666;line-height:180%;margin:10px 0;width:500px;height:88px;overflow:hidden}
+.Star_rating{width:110px;height:20px;background:url(../images/star.png) no-repeat;}
+.comment{font-size:13px;color:#999;line-height:180%;margin:0px auto;width:114px;text-align:right}
+.items{width:715px;margin:10px auto;overflow:hidden}
+.items .num{display:block;float:left;width:auto;padding:10px 20px;margin:10px 5px;border:solid 1px #ddd;border-radius:4px;font-size:14px;color:#333}
+.items .cur{background:#66a2f7;color:#fff}
+.titlebox{width:auto;font-size:14px;color:#666;background:url(../images/conlrbg.png) no-repeat #fafafa;border-bottom:solid 1px #d9d9d9;padding:15px 0 15px 35px}
+.box{position: relative}
+.box .tit1{background-position:12px 17px}
+.box .tit2{background-position:12px -20px}
+.box .tit3{background-position:12px -53px}
+.good_t_box{padding:8px;background:#fff;position: absolute;left:30px;}
+.good_t{padding:20px 0;border-bottom:solid 1px #d9d9d9}
+.good_t .t_pic{float:left;display:block;width:100px;height:100px;margin-right:10px;border-radius:50%;}
+.good_t .t_ms{float:left;line-height:130%}
+.good_t .t_ms h3{font-size:14px;color:#333;padding-right:100px;background:url(../images/star.png) no-repeat;background-size:90px auto}
+.good_t .t_ms p{font-size:12px;color:#999}
+.t_ms .jsxx{font-size:12px;color:#666}
+.dianbox{width:194px;margin:10px auto 40px auto;overflow:hidden;position: absolute;top:500px;left:90px;}
+.dianbox span{display:block;float:left;width:20px;height:20px;line-height:20px;border-radius:50%;background:#ddd;margin:0 12px;text-align: center;cursor:pointer;font-size:12px}
+.dianbox .cur{background:0 0;background:#ff7b23}
+.conter_r .box{background:#fff;border:solid 1px #d9d9d9;margin-bottom:10px;height:561px}
+.t_ms .jibie{width:129px;height:20px;line-height:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#66a2f7;padding-left:15px;margin:5px 0;background:url(../images/conlrbg.png) 0 -104px no-repeat}
+.t_ms .jiaolin{font-size:12px;color:#999;padding-left:15px;margin:5px 0;background:url(../images/conlrbg.png) 0 -154px no-repeat}
+.t_ms .feiyong{font-size:12px;color:#333;margin:5px 0}
+.t_ms .feiyong strong{font-size:18px;color:#ff7b23}
+.t_ms .rzsj{font-size:12px;color:#999;padding-left:15px;margin:5px 0;background:url(../images/conlrbg.png) 0 -66px no-repeat}
+/***外教专区***********/
+.foreign_list{overflow:hidden;background:#fff;width:100%;border:solid 1px #d9d9d9;border-top:none;padding:0 20px;border-bottom:none;box-sizing: border-box;}
+.foreign_mx{float:right;width:1100px}
+.f_mx{margin:5px auto 0;}
+.f_mx .fl{float:left;width:931px;}
+.f_mx .fr{float:right}
+.f_mx .brief_2{width:920px;}
+
+.code{position:fixed;bottom:120px;right:20px;width:120px;height:140px;}
+.code p{width:120px;height:20px;line-height:20px;text-align:center;font-size:8px;font-weight:bold;}
+.code img{width:120px;height:120px;}

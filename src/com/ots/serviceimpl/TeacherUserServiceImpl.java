@@ -9,7 +9,9 @@ import com.ots.entity.TeacherCourse;
 import com.ots.entity.TeacherInfo;
 import com.ots.entity.User;
 import com.ots.service.TeacherUserService;
+import com.ots.utils.ContextUtil;
 import com.ots.vo.TeacherLoginVo;
+import com.ots.vo.UserLoginVo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -250,10 +253,22 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 		return false;
 	}
 
+	@Override
+	public Boolean updateTeacherInfo(TeacherInfo teacherInfo, String avatarName) {
+
+		int flag = this.teacherInfoDao.update(teacherInfo);
+		if(flag==1){
+			return true;
+		}
+		return false;
+	}
+
 
 	public String saveIamge(MultipartFile multipartFile) throws IOException {
+		UserLoginVo userLoginVo = ContextUtil.getUserLoginInfo();
+		Long userId = userLoginVo.getUser().getUserId();
 		InputStream is=multipartFile.getInputStream();
-		String fileNameWithUuid = multipartFile.getOriginalFilename()+"_"+UUID.randomUUID()+".jpg";
+		String fileNameWithUuid = userId+"_avatar.jpg";
 		OutputStream os = new FileOutputStream(NGINX_ROOT_LOCATION+IMAGE_ROOT_LOCATION+AVATAR_LOCATION+fileNameWithUuid);
 		byte[] fileBytes = new byte[256];
 		int count;
@@ -281,6 +296,11 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	@Override
 	public int addCourse(TeacherCourse teacherCourse) {
 		return this.teacherCourseDao.insert(teacherCourse);
+	}
+
+	@Override
+	public TeacherInfo queryTeacherByUserId(TeacherInfo teacherInfo) {
+		return  this.teacherInfoDao.selectOne(teacherInfo);
 	}
 
 

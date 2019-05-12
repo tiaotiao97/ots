@@ -14,14 +14,19 @@
     http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+
     <!-- 配置扫描器 -->
     <context:component-scan 
                base-package="com.ots.controller" />
     <!-- 注解驱动：配置处理器映射器和适配器 -->
     <mvc:annotation-driven />
-    <mvc:resources location="/lib/" mapping="/lib/**"></mvc:resources>
-    <mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
-    <mvc:resources location="/temp/" mapping="/temp/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/views/frontsite/css/" mapping="/frontsite/css/*.css"></mvc:resources>
+    <mvc:resources location="/WEB-INF/views/frontsite/images/" mapping="/frontsite/images/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/views/frontsite/js/" mapping="/frontsite/js/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/views/frontsite/layui/" mapping="/frontsite/layui/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/views/frontsite/img/" mapping="/frontsite/img/**"></mvc:resources>
     <!-- 配置视图解释器ViewResolver -->
     <bean id="jspViewResolver" class=
     "org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -33,7 +38,9 @@
 	<mvc:interceptors>
     	<mvc:interceptor>
         	<mvc:mapping path="/**" />
+            <!--<mvc:exclude-mapping path="/**/*.js" />-->
         	<bean class="com.ots.interceptor.LoginInterceptor" />
     	</mvc:interceptor>
+
 	</mvc:interceptors>
 </beans>

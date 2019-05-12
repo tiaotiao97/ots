@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	注册功能<br>
-  	<form id="teacher_register_submit" action="doTeacherRegister.action" method="post">
+  	<form id="teacher_register_submit" action="/ots/user/register" method="post">
     username:<input name="username"><br>
     password:<input name="password"><br>
     telphone:<input name="phone"><br>

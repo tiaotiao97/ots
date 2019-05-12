@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
 
         User inputUser = new User();
         inputUser.setUsername(username);
-        inputUser.setIdentity(identity);
+        //inputUser.setIdentity(identity);
         User user = this.userDao.selectOne(inputUser);
         if(null == user){
             //用户不存在
@@ -74,20 +74,16 @@ public class LoginServiceImpl implements LoginService {
 
         //如果没有登陆
         //如果是老师
-        if(user.getIdentity().equals(1)){
 
-            TeacherInfo teacherInfoCondition = new TeacherInfo();
-            teacherInfoCondition.setUserId(user.getUserId());
-            TeacherInfo teacherInfo = this.teacherInfoDao.selectOne(teacherInfoCondition);
 
-            userLoginVo2.setUser(user);
-            userLoginVo2.setUserInfoObject(teacherInfo);
-        }
-        //如果是学生
-        else if(user.getIdentity().equals(2)){
-            userLoginVo2.setUser(user);
-            userLoginVo2.setUserInfoObject("none");
-        }
+        TeacherInfo teacherInfoCondition = new TeacherInfo();
+        teacherInfoCondition.setUserId(user.getUserId());
+        TeacherInfo teacherInfo = this.teacherInfoDao.selectOne(teacherInfoCondition);
+
+        userLoginVo2.setUser(user);
+        userLoginVo2.setUserInfoObject(teacherInfo);
+
+
 
         String newLoginToken = DigestUtils.md5Hex(username + System.currentTimeMillis());
         this.redisService.set("loginToken_"+newLoginToken, MAPPER.writeValueAsString(userLoginVo2));

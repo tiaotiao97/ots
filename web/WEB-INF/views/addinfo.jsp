@@ -12,7 +12,7 @@
 </head>
 <body>
     补充用户信息：<br>
-    <form action="addTeacherUserInfo.action" method="post" enctype="multipart/form-data">
+    <form action="updateTeacherUserInfo.action" method="post" enctype="multipart/form-data">
         真实姓名：<input name="teacherInfo.realName"><br>
         身份证号：<input name="teacherInfo.idCardNum"><br>
         银行卡号：<input name="teacherInfo.bankCardNo"><br>

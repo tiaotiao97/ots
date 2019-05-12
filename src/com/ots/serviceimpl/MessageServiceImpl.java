@@ -2,6 +2,7 @@ package com.ots.serviceimpl;
 
 import com.ots.dao.MessageDao;
 import com.ots.entity.Message;
+import com.ots.entity.MessageUserVo;
 import com.ots.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class MessageServiceImpl implements MessageService {
 
     }
 
-    public List<Message> showMyMessage(Message message){
+    public List<MessageUserVo> showMyMessage(Message message){
 
         return this.messageDao.select(message);
     }
