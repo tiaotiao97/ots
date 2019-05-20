@@ -1,5 +1,6 @@
 package com.ots.controller;
 
+import com.ots.entity.TeacherCourse;
 import com.ots.resultbean.GetResultBean;
 import com.ots.resultbean.ResultBean;
 import com.ots.service.TeacherCourseService;
@@ -20,15 +21,15 @@ public class TeacherCourseController {
     @Autowired
     private TeacherCourseService teacherCourseService;
 
-    @RequestMapping(value = "querycourses",method = RequestMethod.GET)
-    public String showteachercourse(){
+    @RequestMapping(value = "querycourses", method = RequestMethod.GET)
+    public String showteachercourse() {
         return "querycourses";
     }
 
 
     @RequestMapping("queryTeacherCourses")
     @ResponseBody
-    public ResultBean<List<TeacherCourseVo>> queryTeacherCourseList(TeacherCourseVo teacherCourseVo){
+    public ResultBean<List<TeacherCourseVo>> queryTeacherCourseList(TeacherCourseVo teacherCourseVo) {
         List<TeacherCourseVo> teacherCourseList = this.teacherCourseService.showTeacherCourse(teacherCourseVo);
         ResultBean<List<TeacherCourseVo>> resultBean = GetResultBean.getResultBean();
         resultBean.setCode(200);
@@ -36,5 +37,6 @@ public class TeacherCourseController {
         resultBean.setData(teacherCourseList);
         return resultBean;
     }
+
 
 }

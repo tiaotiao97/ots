@@ -1,6 +1,6 @@
 package com.ots.entity;
 
-public class TeacherInfo {
+public class UserInfo {
     private Long userId;
     private String realName;
     private String idCardNum;

@@ -1,9 +1,6 @@
 package com.ots.interceptor;
 
 import com.ots.service.LoginService;
-import com.ots.service.TeacherUserService;
-import com.ots.serviceimpl.RedisService;
-import com.ots.vo.TeacherLoginVo;
 import com.ots.vo.UserLoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;

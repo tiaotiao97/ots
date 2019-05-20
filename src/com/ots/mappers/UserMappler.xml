@@ -13,6 +13,10 @@
 	    <if test="username != null" >
         and username = #{username}
       	</if>
+
+		<if test="userId != null" >
+			and userid = #{userId}
+		</if>
       	
       	<if test="phone != null" >
         and phone = #{phone}

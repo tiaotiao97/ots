@@ -3,7 +3,7 @@ package com.ots.controller;
 import com.ots.entity.User;
 import com.ots.resultbean.GetResultBean;
 import com.ots.resultbean.ResultBean;
-import com.ots.service.TeacherUserService;
+import com.ots.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class RegisterController {
 
     @Autowired
-    private TeacherUserService teacherUserService;
+    private UserInfoService userInfoService;
 
 
     @RequestMapping(value="/register",method= RequestMethod.POST)
@@ -29,11 +29,11 @@ public class RegisterController {
         ResultBean<Map<String, Object>> resultBean = GetResultBean.getResultBean();
 
         try {
-            result = this.teacherUserService.checkRegisterInfo(user);
+            result = this.userInfoService.checkRegisterInfo(user);
             if(result.get("status").equals("200")){
                 User registerUser = (User)(result.get("data"));
 
-                Boolean bool = this.teacherUserService.doRegister(registerUser);
+                Boolean bool = this.userInfoService.doRegister(registerUser);
                 resultBean.setResult(200,"注册成功.",result);
             }
 

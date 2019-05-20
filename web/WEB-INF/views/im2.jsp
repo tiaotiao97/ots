@@ -9,14 +9,14 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="http://j2.58cdn.com.cn/js/jquery-1.8.3.js"></script>
+    <script src="http://127.0.0.1:8080/ots/frontsite/js/jquery.js"></script>
 </head>
 <body>
-
+我是23，
 <script>
     var websoket = null;
     if('WebSocket' in window){
-        websocket = new WebSocket("ws://"+document.location.host+"/ots"+"/webSocketServer/31");
+        websocket = new WebSocket("ws://"+document.location.host+"/ots"+"/webSocketServer/23/1");
     }else {
         alert("当前浏览器不支持websocket")
     }

@@ -4,11 +4,10 @@ import com.ots.entity.Reply;
 import com.ots.resultbean.GetResultBean;
 import com.ots.resultbean.ResultBean;
 import com.ots.service.ReplyService;
-import com.ots.service.TeacherUserService;
+import com.ots.service.UserInfoService;
 import com.ots.utils.ContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +23,7 @@ public class ReplyController {
     private ReplyService replyService;
 
     @Autowired
-    private TeacherUserService teacherUserService;
+    private UserInfoService userInfoService;
 
     @RequestMapping(value="replymsg",method= RequestMethod.GET)
     public String addinfo(){

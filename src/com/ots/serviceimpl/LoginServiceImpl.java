@@ -1,9 +1,9 @@
 package com.ots.serviceimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ots.dao.TeacherInfoDao;
+import com.ots.dao.UserInfoDao;
 import com.ots.dao.UserDao;
-import com.ots.entity.TeacherInfo;
+import com.ots.entity.UserInfo;
 import com.ots.entity.User;
 import com.ots.service.LoginService;
 import com.ots.vo.UserLoginVo;
@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
     private RedisService redisService;
 
     @Autowired
-    private TeacherInfoDao teacherInfoDao;
+    private UserInfoDao userInfoDao;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -76,12 +76,12 @@ public class LoginServiceImpl implements LoginService {
         //如果是老师
 
 
-        TeacherInfo teacherInfoCondition = new TeacherInfo();
-        teacherInfoCondition.setUserId(user.getUserId());
-        TeacherInfo teacherInfo = this.teacherInfoDao.selectOne(teacherInfoCondition);
+        UserInfo userInfoCondition = new UserInfo();
+        userInfoCondition.setUserId(user.getUserId());
+        UserInfo userInfo = this.userInfoDao.selectOne(userInfoCondition);
 
         userLoginVo2.setUser(user);
-        userLoginVo2.setUserInfoObject(teacherInfo);
+        userLoginVo2.setUserInfoObject(userInfo);
 
 
 

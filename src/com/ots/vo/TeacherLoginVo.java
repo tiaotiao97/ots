@@ -1,11 +1,11 @@
 package com.ots.vo;
 
-import com.ots.entity.TeacherInfo;
+import com.ots.entity.UserInfo;
 import com.ots.entity.User;
 
 public class TeacherLoginVo {
     private User user;
-    private TeacherInfo teacherInfo;
+    private UserInfo userInfo;
 
     public User getUser() {
         return user;
@@ -15,11 +15,11 @@ public class TeacherLoginVo {
         this.user = user;
     }
 
-    public TeacherInfo getTeacherInfo() {
-        return teacherInfo;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setTeacherInfo(TeacherInfo teacherInfo) {
-        this.teacherInfo = teacherInfo;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    public Order createOrder(Long teacherId,Long studentId,Long courseId,Float price);
+    public Order createOrder(Order order);
     public List<Order> showOrders(Order order);
     public Order addOrder(Order order);
 }

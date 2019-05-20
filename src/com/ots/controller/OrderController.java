@@ -30,12 +30,12 @@ public class OrderController {
         ResultBean<Order> resultBean = GetResultBean.getResultBean();
         //目前测试先调用老师的接口.等补充完学生登陆模块，再修改
         User user = ContextUtil.getTeacherLoginInfo().getUser();
-        Order order = this.orderService.addOrder(this.orderService.createOrder(23L,user.getUserId(),1L,37.2F));
-        if(order != null){
-            resultBean.setResult(200,"生成订单成功.",order);
-        }else {
-            resultBean.setResult(500,"生成订单出错.",null);
-        }
+//        Order order = this.orderService.addOrder(this.orderService.createOrder(23L,user.getUserId(),1L,37.2F));
+//        if(order != null){
+//            resultBean.setResult(200,"生成订单成功.",order);
+//        }else {
+//            resultBean.setResult(500,"生成订单出错.",null);
+//        }
         return resultBean;
 
     }

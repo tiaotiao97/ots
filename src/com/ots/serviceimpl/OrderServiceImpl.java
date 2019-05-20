@@ -16,14 +16,10 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public Order createOrder(Long teacherId, Long studentId, Long courseId, Float price) {
-        Order order = new Order();
-        order.setCourseId(courseId);
-        order.setPrice(price);
-        order.setStudentId(studentId);
-        order.setTeacherId(teacherId);
-        order.setTeacherMoney(0.80F*price);
-        order.setPlatformMoney(0.20F*price);
+    public Order createOrder(Order order) {
+
+        order.setTeacherMoney(0.80F*order.getPrice());
+        order.setPlatformMoney(0.20F*order.getPrice());
         return order;
     }
 

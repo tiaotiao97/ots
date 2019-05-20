@@ -13,9 +13,9 @@
 <body>
     补充用户信息：<br>
     <form action="updateTeacherUserInfo.action" method="post" enctype="multipart/form-data">
-        真实姓名：<input name="teacherInfo.realName"><br>
-        身份证号：<input name="teacherInfo.idCardNum"><br>
-        银行卡号：<input name="teacherInfo.bankCardNo"><br>
+        真实姓名：<input name="userInfo.realName"><br>
+        身份证号：<input name="userInfo.idCardNum"><br>
+        银行卡号：<input name="userInfo.bankCardNo"><br>
         上传头像：<input name="avatar" type="file"><br>
         <input name="submit" type="submit">
 

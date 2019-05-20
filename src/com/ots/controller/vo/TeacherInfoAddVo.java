@@ -1,18 +1,18 @@
 package com.ots.controller.vo;
 
-import com.ots.entity.TeacherInfo;
+import com.ots.entity.UserInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class TeacherInfoAddVo {
-    private TeacherInfo teacherInfo;
+    private UserInfo userInfo;
     private MultipartFile avatar;
 
-    public TeacherInfo getTeacherInfo() {
-        return teacherInfo;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setTeacherInfo(TeacherInfo teacherInfo) {
-        this.teacherInfo = teacherInfo;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     public MultipartFile getAvatar() {

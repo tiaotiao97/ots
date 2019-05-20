@@ -5,7 +5,7 @@ import java.awt.geom.FlatteningPathIterator;
 public class TeacherCourse {
     private Long teacherId;
     private Long courseId;
-    private Float coursePrice;
+    private Double coursePrice;
 
     public Long getTeacherId() {
         return teacherId;
@@ -23,11 +23,11 @@ public class TeacherCourse {
         this.courseId = courseId;
     }
 
-    public Float getCoursePrice() {
+    public Double getCoursePrice() {
         return coursePrice;
     }
 
-    public void setCoursePrice(Float coursePrice) {
+    public void setCoursePrice(Double coursePrice) {
         this.coursePrice = coursePrice;
     }
 }

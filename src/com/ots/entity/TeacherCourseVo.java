@@ -4,7 +4,7 @@ public class TeacherCourseVo {
     private Long userId;
     private String realName;
     private Integer courseId;
-    private Float coursePrice;
+    private Double coursePrice;
     private String courseName;
     private Integer grade;
 
@@ -32,11 +32,11 @@ public class TeacherCourseVo {
         this.courseId = courseId;
     }
 
-    public Float getCoursePrice() {
+    public Double getCoursePrice() {
         return coursePrice;
     }
 
-    public void setCoursePrice(Float coursePrice) {
+    public void setCoursePrice(Double coursePrice) {
         this.coursePrice = coursePrice;
     }
 

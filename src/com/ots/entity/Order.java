@@ -15,9 +15,9 @@ public class Order {
         this.courseId = courseId;
     }
 
-    private Float price;
-    private Float teacherMoney;
-    private Float platformMoney;
+    private Double price;
+    private Double teacherMoney;
+    private Double platformMoney;
     private Integer isPay;
 
     public Long getOrderId() {
@@ -44,27 +44,27 @@ public class Order {
         this.studentId = studentId;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Float getTeacherMoney() {
+    public Double getTeacherMoney() {
         return teacherMoney;
     }
 
-    public void setTeacherMoney(Float teacherMoney) {
+    public void setTeacherMoney(Double teacherMoney) {
         this.teacherMoney = teacherMoney;
     }
 
-    public Float getPlatformMoney() {
+    public Double getPlatformMoney() {
         return platformMoney;
     }
 
-    public void setPlatformMoney(Float platformMoney) {
+    public void setPlatformMoney(Double platformMoney) {
         this.platformMoney = platformMoney;
     }
 

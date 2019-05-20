@@ -1,14 +1,13 @@
 package com.ots.serviceimpl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ots.dao.TeacherCourseDao;
-import com.ots.dao.TeacherInfoDao;
+import com.ots.dao.UserInfoDao;
 import com.ots.dao.UserDao;
 import com.ots.entity.TeacherCourse;
-import com.ots.entity.TeacherInfo;
+import com.ots.entity.UserInfo;
 import com.ots.entity.User;
-import com.ots.service.TeacherUserService;
+import com.ots.service.UserInfoService;
 import com.ots.utils.ContextUtil;
 import com.ots.vo.TeacherLoginVo;
 import com.ots.vo.UserLoginVo;
@@ -17,19 +16,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class TeacherUserServiceImpl implements TeacherUserService {
+public class UserInfoServiceImpl implements UserInfoService {
 
 	@Value("${nginx.root}")
 	String NGINX_ROOT_LOCATION;
@@ -44,7 +40,7 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	private UserDao userDao;
 
 	@Autowired(required = false)
-	private TeacherInfoDao teacherInfoDao;
+	private UserInfoDao userInfoDao;
 	
 	@Autowired
 	private RedisService redisService;
@@ -181,7 +177,7 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 		}
 
 		//登陆时先判断当前用户是否登陆。
-	public String doTeacherLogin(String cookieLoginToken, String username, String password) throws Exception{
+	public String doUserLogin(String cookieLoginToken, String username, String password) throws Exception{
 		
 
 		User teacherUser = new User();
@@ -201,7 +197,7 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 			return null;
 		}
 		//校验当前cookie是否已经登陆
-		if(cookieLoginToken != null && queryTeacherLoginVo(cookieLoginToken)!=null){
+		if(cookieLoginToken != null && queryUserLoginVo(cookieLoginToken)!=null){
 			User cookieUser = MAPPER.readValue(this.redisService.get("loginToken_"+cookieLoginToken),User.class);
 			if(cookieUser.getUsername().equals(username)){
 				return cookieLoginToken;
@@ -209,13 +205,13 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 
 		}
 		//登陆成功，将用户的信息保存到redis中
-		TeacherInfo teacherInfoCondition = new TeacherInfo();
-		teacherInfoCondition.setUserId(user.getUserId());
+		UserInfo userInfoCondition = new UserInfo();
+		userInfoCondition.setUserId(user.getUserId());
 
-		TeacherInfo teacherInfo = this.teacherInfoDao.selectOne(teacherInfoCondition);
+		UserInfo userInfo = this.userInfoDao.selectOne(userInfoCondition);
 
 		TeacherLoginVo teacherLoginVo = new TeacherLoginVo();
-		teacherLoginVo.setTeacherInfo(teacherInfo);
+		teacherLoginVo.setUserInfo(userInfo);
 		teacherLoginVo.setUser(user);
 		System.out.println("正在生成login-token...");
 		String newLoginToken = DigestUtils.md5Hex(username + System.currentTimeMillis());
@@ -225,7 +221,7 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	}
 
 
-	public TeacherLoginVo queryTeacherLoginVo( String loginToken){
+	public TeacherLoginVo queryUserLoginVo( String loginToken){
 		String userJsonData = this.redisService.get("loginToken_"+loginToken);
 		if(StringUtils.isEmpty(userJsonData)){
 			//登陆超时
@@ -244,9 +240,9 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	}
 
 	@Override
-	public Boolean saveTeacherInfo(TeacherInfo teacherInfo, String avatarName) {
+	public Boolean saveUserInfo(UserInfo userInfo, String avatarName) {
 
-		int flag = this.teacherInfoDao.insert(teacherInfo);
+		int flag = this.userInfoDao.insert(userInfo);
 		if(flag==1){
 			return true;
 		}
@@ -254,9 +250,9 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	}
 
 	@Override
-	public Boolean updateTeacherInfo(TeacherInfo teacherInfo, String avatarName) {
+	public Boolean updateUserInfo(UserInfo userInfo, String avatarName) {
 
-		int flag = this.teacherInfoDao.update(teacherInfo);
+		int flag = this.userInfoDao.update(userInfo);
 		if(flag==1){
 			return true;
 		}
@@ -281,8 +277,8 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 
 	}
 
-	public void changeTeacherStatus(String loginToken,Integer status){
-		TeacherLoginVo teacherLoginVo = this.queryTeacherLoginVo(loginToken);
+	public void changeUserStatus(String loginToken,Integer status){
+		TeacherLoginVo teacherLoginVo = this.queryUserLoginVo(loginToken);
 		teacherLoginVo.getUser().setStatus(status);
 		try{
 			this.redisService.set("loginToken_"+loginToken, MAPPER.writeValueAsString(teacherLoginVo));
@@ -299,8 +295,8 @@ public class TeacherUserServiceImpl implements TeacherUserService {
 	}
 
 	@Override
-	public TeacherInfo queryTeacherByUserId(TeacherInfo teacherInfo) {
-		return  this.teacherInfoDao.selectOne(teacherInfo);
+	public UserInfo queryUserByUserId(UserInfo userInfo) {
+		return  this.userInfoDao.selectOne(userInfo);
 	}
 
 

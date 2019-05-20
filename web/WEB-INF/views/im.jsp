@@ -9,14 +9,16 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="http://j2.58cdn.com.cn/js/jquery-1.8.3.js"></script>
+    <script src="http://127.0.0.1:8080/ots/frontsite/js/jquery.js"></script>
 </head>
 <body>
+
+我是31
 
     <script>
         var websoket = null;
         if('WebSocket' in window){
-            websocket = new WebSocket("ws://"+document.location.host+"/ots"+"/webSocketServer/23");
+            websocket = new WebSocket("ws://"+document.location.host+"/ots"+"/webSocketServer/31/1");
         }else {
             alert("当前浏览器不支持websocket")
         }
@@ -50,6 +52,7 @@
         //关闭WebSocket连接
         function closeWebSocket() {
             console.log("close");
+            alert("会话结束.订单生成中.");
             websocket.close();
         }
     </script>
@@ -59,6 +62,9 @@
     内容是：<textarea id="info" class=""></textarea>
     <button onclick="send1()"  cmd="sendMsg">
         <span class="btn_text">发送</span>
+    </button>
+    <button onclick="closeWebSocket()">
+        <span class="btn_text">结束会话</span>
     </button>
     <br><br><br>
     <div id="showmessage"></div>

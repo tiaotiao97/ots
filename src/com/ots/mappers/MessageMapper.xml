@@ -29,7 +29,7 @@
         </if>
     </select>
 
-	<!--<update id="update" parameterType="TeacherInfo">-->
+	<!--<update id="update" parameterType="UserInfo">-->
 		<!--update teacher_info set-->
 		<!--(userid,realname,idcardnum,grade,subjectid)-->
 		<!--values(#{userId},#{realName},#{idCardNum},#{grade},#{subjectId})-->

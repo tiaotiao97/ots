@@ -121,7 +121,7 @@ function selectType(item) {
       <table class="grzx" width="705" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="90"><span>*</span>真实姓名：</td>
-          <td width="430"><input name="teacherInfo.realName" type="text" class="text inputxt" id="name" /></td>
+          <td width="430"><input name="userInfo.realName" type="text" class="text inputxt" id="name" /></td>
           <td rowspan="8" valign="top"><div id="tx"><img src="" id="image"/></div>
             <span class="file"><input name="avatar" type="file" class="file1" /></span></td>
         </tr>
@@ -135,11 +135,11 @@ function selectType(item) {
           <td><input type="text" class="text1" datatype="e" id="phone"/></td>
         </tr>
         <tr>
-          <td><span>*</span>身份证:</td><td><input name="teacherInfo.idCardNum" type="text" class="text1 inputxt" datatype="idcard" nullmsg="请填写身份证号码！" errormsg="您填写的身份证号码不对！必须位数字且不低于18位" id="IdCard" /></td>
+          <td><span>*</span>身份证:</td><td><input name="userInfo.idCardNum" type="text" class="text1 inputxt" datatype="idcard" nullmsg="请填写身份证号码！" errormsg="您填写的身份证号码不对！必须位数字且不低于18位" id="IdCard" /></td>
         </tr>
           <tr>
               <td><span>*</span>银行卡:</td>
-              <td><input  name="teacherInfo.bankCardNo" type="text" class="text1" datatype="e"  id="BankCard"  /></td>
+              <td><input  name="userInfo.bankCardNo" type="text" class="text1" datatype="e"  id="BankCard"  /></td>
 
           </tr>
         <tr>
