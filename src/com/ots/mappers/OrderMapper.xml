@@ -10,8 +10,8 @@
 	    from ots_order
 	    where 1=1
 	    
-	    <if test="oderId != null" >
-        and oderId = #{oderId}
+	    <if test="orderId != null" >
+        and orderId = #{orderId}
       	</if>
       	
       	<if test="teacherId != null" >
@@ -32,6 +32,30 @@
     	insert into ots_order(teacherId,studentId,courseId,price,teacherMoney,platformMoney)
     	values(#{teacherId},#{studentId},#{courseId},#{price},#{teacherMoney},#{platformMoney})
     </insert>
+
+	<update id="update" parameterType="Order">
+		update ots_order
+		<set>
+
+			<if test="orderId != null" >
+				orderId = #{orderId},
+			</if>
+
+			<if test="teacherId != null" >
+			  	teacherId = #{teacherId},
+			</if>
+
+			<if test="studentId != null" >
+				studentId = #{studentId},
+			</if>
+
+			<if test="isPay != null" >
+				isPay = #{isPay},
+			</if>
+		</set>
+		where orderId = #{orderId}
+
+	</update>
 
     
 </mapper>

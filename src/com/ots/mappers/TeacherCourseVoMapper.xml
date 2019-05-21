@@ -20,15 +20,15 @@
     </select>
 
 	<select id="select" parameterType="TeacherCourseVo" resultType="TeacherCourseVo">
-		select teacher_info.userid,teacher_info.realname,teacher_course.courseId,teacher_course.coursePrice,course.courseName,course.grade
-		from teacher_info
-		LEFT JOIN teacher_course on teacher_info.userid=teacher_course.teacherId
+		select user_info.userid,user_info.realname,teacher_course.courseId,teacher_course.coursePrice,course.courseName,course.grade
+		from user_info
+		LEFT JOIN teacher_course on user_info.userid=teacher_course.teacherId
 		LEFT JOIN course on teacher_course.courseId=course.courseId
-		LEFT JOIN `user` on teacher_info.userid=`user`.userid
+		LEFT JOIN `user` on user_info.userid=`user`.userid
 		where 1=1 and `user`.identity=1
 
 		<if test="userId != null" >
-			and teacher_info.userid = #{userId}
+			and user_info.userid = #{userId}
 		</if>
 
 		<if test="courseId != null" >
@@ -40,7 +40,7 @@
 		</if>
 
 		<if test="realName != null and realName != ''" >
-			and teacher_info.realname = #{realName}
+			and user_info.realname = #{realName}
 		</if>
 
 		<if test="courseName != null and courseName != ''" >
@@ -48,5 +48,5 @@
 		</if>
 
 	</select>
-    
+
 </mapper>

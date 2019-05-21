@@ -29,5 +29,10 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
         return this.teacherCourseDao.selectOne(teacherCourse);
     }
 
+    @Override
+    public int deleteTeacherCourseByCourseId(TeacherCourse teacherCourse) {
+        return this.teacherCourseDao.deleteOne(teacherCourse);
+    }
+
 
 }

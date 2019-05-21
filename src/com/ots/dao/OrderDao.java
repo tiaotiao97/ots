@@ -8,4 +8,5 @@ public interface OrderDao {
 
     public List<Order> select(Order order);
     public int insert(Order order);
+    public int update(Order order);
 }

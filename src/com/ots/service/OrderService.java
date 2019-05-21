@@ -9,4 +9,5 @@ public interface OrderService {
     public Order createOrder(Order order);
     public List<Order> showOrders(Order order);
     public Order addOrder(Order order);
+    public int updateOrder(Order order);
 }

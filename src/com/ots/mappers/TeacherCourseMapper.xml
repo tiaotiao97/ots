@@ -24,5 +24,12 @@
     	values(#{teacherId},#{courseId},#{coursePrice})
     </insert>
 
-    
+    <delete id="deleteOne" parameterType="TeacherCourse">
+		DELETE FROM teacher_course WHERE courseId=#{courseId}
+	</delete>
+
+	<delete id="deleteist" parameterType="TeacherCourse">
+		DELETE FROM teacher_course WHERE courseId=#{courseId}
+	</delete>
+
 </mapper>

@@ -4,7 +4,7 @@
 <mapper namespace="com.ots.dao.CourseDao" >
 
 
-    <!-- 查询用户 -->
+    <!-- 查询课程 -->
     <select id="selectCourseName" resultType="Course">
 	    select *
 	    from course

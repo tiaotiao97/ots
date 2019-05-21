@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,6 +7,30 @@
 <link type="text/css" href="css/css.css" rel="stylesheet" />
 <script type="text/javascript" src="js/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/js.js"></script>
+ <script type="text/javascript" src="js/vue.js"></script>
+
+ <script>
+     var referOrderId = window.location.search.split("&")[0].split("=")[1];
+     if(referOrderId!=null){
+        $.ajax({
+            url:"/ots/order/changeOrderStatus?orderId="+referOrderId,
+            method:"GET",
+            async:false,
+            error:function (result) {
+            }
+        });
+     }
+     $.ajax({
+         url:"/ots/order/queryOrders",
+         method:"GET",
+         success:function (result) {
+             vueapp.orders = result.data;
+         }
+
+     });
+
+
+ </script>
 
 </head>
 
@@ -70,7 +95,7 @@
    <h3 class="vipName">测试webqin</h3>
    <dl class="vipNav">
     <dt class="vip_1 vipCur">买家中心</dt>
-     <dd class="ddCur"><a href="vipOrder.html">我的订单</a></dd>
+     <dd class="ddCur"><a href="vipOrder.jsp">我的订单</a></dd>
      <dd><a href="vipShoucang.html">收藏关注</a></dd>
     <dt class="vip_2">账户设置</dt>
      <dd><a href="vip.jsp">个人信息</a></dd>
@@ -90,47 +115,17 @@
     我的订单 <span style="margin-left:40px;">待发货 <span class="red">10</span> </span>
     <span>待收货 <span class="red">15</span></span>
     </h2>
-    <table class="vipOrder">
-     <tr>
-      <td><a href="proinfo.html"><img src="images/phone.png" width="60" height="55"></a></td>
-      <td>张益达</td>
-      <td>￥16.9<br />支付宝支付</td>
-      <td>2014年6月23日11:32:17</td>
-      <td><a href="success.html"><strong>等待付款</strong></a></td>
+    <table class="vipOrder" id="orders">
+     <tr v-for="order in orders">
+      <td>订单编号：{{order.orderId}}</td>
+      <td>老师：{{order.teacherId}}</td>
+      <td>课程：{{order.courseId}}</td>
+      <td>价钱：{{order.price}}</td>
+      <td v-if="order.isPay==0"><strong>订单状态:未支付</strong></td>
+      <td v-if="order.isPay==1"><strong>订单状态:已支付</strong><br/>支付宝支付</td>
       <td><a href="vipXiaofei.html">查看</a></td>
      </tr>
-     <tr>
-      <td><a href="proinfo.html"><img src="images/phone.png" width="60" height="55"></a></td>
-      <td>张益达</td>
-      <td>￥16.9<br />支付宝支付</td>
-      <td>2014年6月23日11:32:17</td>
-      <td><a href="success.html"><strong>等待付款</strong></a></td>
-      <td><a href="vipXiaofei.html">查看</a></td>
-     </tr>
-     <tr>
-      <td><a href="proinfo.html"><img src="images/phone.png" width="60" height="55"></a></td>
-      <td>张益达</td>
-      <td>￥16.9<br />支付宝支付</td>
-      <td>2014年6月23日11:32:17</td>
-      <td><a href="success.html"><strong>等待付款</strong></a></td>
-      <td><a href="vipXiaofei.html">查看</a></td>
-     </tr>
-     <tr>
-      <td><a href="proinfo.html"><img src="images/phone.png" width="60" height="55"></a></td>
-      <td>张益达</td>
-      <td>￥16.9<br />支付宝支付</td>
-      <td>2014年6月23日11:32:17</td>
-      <td><a href="success.html"><strong>等待付款</strong></a></td>
-      <td><a href="vipXiaofei.html">查看</a></td>
-     </tr>
-     <tr>
-      <td><a href="proinfo.html"><img src="images/phone.png" width="60" height="55"></a></td>
-      <td>张益达</td>
-      <td>￥16.9<br />支付宝支付</td>
-      <td>2014年6月23日11:32:17</td>
-      <td><a href="success.html"><strong>等待付款</strong></a></td>
-      <td><a href="vipXiaofei.html">查看</a></td>
-     </tr>
+
     </table><!--vipOrder/-->
   </div><!--vipRight/-->
   <div class="clears"></div>
@@ -198,5 +193,16 @@
   <br />
   <span>&copy; 2014 Unqezi 使用前必读 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></span>
  </div><!--footer/-->
+
+<script>
+    var vueapp = new Vue({
+        el:"#orders",
+        data:{orders:[]}
+
+
+    });
+
+
+</script>
 </body>
 </html>

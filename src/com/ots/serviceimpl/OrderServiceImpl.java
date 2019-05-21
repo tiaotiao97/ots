@@ -36,4 +36,9 @@ public class OrderServiceImpl implements OrderService {
         }
         return null;
     }
+
+    @Override
+    public int updateOrder(Order order) {
+        return this.orderDao.update(order);
+    }
 }
